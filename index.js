@@ -52,12 +52,13 @@ router.post('/', function(req, res) {
                 "from": req.body.language_from
             }
         });
-        console.log(res.text);
+        //console.log(res.text);
         //=> I speak English
-        console.log(res.from.language.iso);
+        //console.log(res.from.language.iso);
         //=> nl
     }).catch(err => {
-        console.error(err);
+        res.json(err);
+        //console.error(err);
     });
        
 });
@@ -71,4 +72,4 @@ app.use('/translate', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+//console.log('Magic happens on port ' + port);
