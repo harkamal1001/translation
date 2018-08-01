@@ -1,28 +1,3 @@
-/*var express = require('express');
-var app = express();
-
-app.get('/translate/:text/:lang', function(req, res) {
-   res.send('lang: ' + req.params.lang + ' and text: ' + req.params.text);
-});
-app.listen(3000);
-*/
-
-/*const translate = require('google-translate-api');
- 
-translate('I can speak english', {to: 'da'}).then(res => {
-    console.log(res.text);
-    //=> I speak English
-    console.log(res.from.language.iso);
-    //=> nl
-}).catch(err => {
-    console.error(err);
-});*/
-
-// server.js
-
-// BASE SETUP
-// =============================================================================
-
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
@@ -40,7 +15,7 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.post('/', function(req, res) {
+router.get('/', function(req, res) {
     translate(req.body.text, {from: req.body.language_from, to: req.body.language_to}).then(response => {
         res.json({
             "text": {
@@ -52,13 +27,9 @@ router.post('/', function(req, res) {
                 "from": req.body.language_from
             }
         });
-        //console.log(res.text);
-        //=> I speak English
-        //console.log(res.from.language.iso);
-        //=> nl
+     
     }).catch(err => {
         res.json(err);
-        //console.error(err);
     });
        
 });
@@ -67,7 +38,7 @@ router.post('/', function(req, res) {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/translate', router);
+app.use('/', router);
 
 // START THE SERVER
 // =============================================================================
